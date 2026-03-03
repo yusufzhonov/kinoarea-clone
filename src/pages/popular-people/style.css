@@ -1,6 +1,9 @@
 .app {
     background-color: #1E2538;
 }
+body{
+    padding-top: 30px;
+}
 
 .upper-box {
     display: flex;
@@ -14,7 +17,7 @@
         font-size: 45px;
     }
 
-    .right-box {
+    .right-boxi {
         display: flex;
         align-items: center;
         gap: 40px;
@@ -44,7 +47,7 @@
 .left-box {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 15px;
 }
 
 .left {
@@ -128,15 +131,15 @@
         font-size: 15px;
     }
 
-    .fourth {
+    .p-4 {
         color: #00FF7F;
     }
 
-    .fifth {
+    .p-5  {
         color: #00BFFF;
     }
 
-    .sixth {
+    .p-6  {
         color: #DA70D6;
     }
 }
@@ -181,7 +184,7 @@ header {
     color: #4c6fff;
 
     img {
-        width: 18px;
+        width: 22px;
         margin-right: 3px;
     }
 }
@@ -457,6 +460,7 @@ img {
     cursor: pointer;
     color: #fff;
     font-size: 17px;
+    /* background-color: none; */
 }
 
 .trailers__swiper {
