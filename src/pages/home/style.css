@@ -155,14 +155,16 @@ header {
 /* ===== MOVIE CARD ===== */
 
 .movie-card {
-    width: 260px;
+    /* width: 260px; */
     font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 40px;
+    /* height: 150px; */
 }
 
 /* POSTER */
 
 .poster {
-    position: relative;
+    /* position: relative; */
     border-radius: 16px;
     overflow: hidden;
 }
@@ -171,6 +173,8 @@ header {
     width: 100%;
     display: block;
     border-radius: 16px;
+    height: 430px;
+    background-color: red;
 }
 
 /* RATING */
@@ -206,11 +210,11 @@ header {
     font-weight: 500;
 }
 
-.movie-card:hover {
+/* .movie-card:hover {
     img {
         background-color: #4c6fff;
     }
-}
+} */
 
 .cn-top {
     display: flex;
