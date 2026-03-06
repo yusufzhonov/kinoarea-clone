@@ -42,7 +42,7 @@ export function Movie(item) {
     // rating
     const rating = document.createElement("div");
     rating.className = "rating";
-    rating.textContent = normalizeRating(item.popularity);
+    rating.textContent = item.vote_average.toFixed(1);
 
     // movie-info
     const movieInfo = document.createElement("div");
