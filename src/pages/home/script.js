@@ -9,7 +9,9 @@ import { api } from '../../libs/api';
 import { Movie } from "../../components/Movie";
 import { header } from '../../components/header';
 import { footer } from '../../components/footer';
-import { genres } from '../../components/genres';
+// import { genres } from '../../components/genres';
+import { Trailer } from '../../components/Trailer';
+import { genres } from '../../components/Genres';
 header()
 footer()
 
@@ -21,7 +23,6 @@ const swiper = new Swiper('.trailers__swiper', {
     slidesPerView: 4,
     spaceBetween: 20,
     grabCursor: true,
-
     //   resistanceRatio: 0,
 
     freeMode: {
@@ -121,14 +122,17 @@ api.get("movie/popular")
         }
 
     })
+    let movieGenre = document.querySelector(".genres")
 api.get("/genre/movie/list")
     .then(res => {
         render(res.data.genres.slice(0, 6), geanre_list, genres)
+
     })
+    let swiperWrapper = document.querySelector(".swiper-wrapper")
 api.get("/movie/upcoming")
     .then(res => {
         render(res.data.results.slice(0, 4), upcomig_movies_box, Movie)
-
+        render(res.data.results, swiperWrapper, Trailer)
         upcomig_movies_next_btn.onclick = () => {
             let movies = res.data.results
             first += 4;

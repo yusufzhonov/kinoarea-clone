@@ -1,0 +1,29 @@
+/* .backBtn {
+  padding: 16px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+
+  background: linear-gradient(180deg, #4f6df5, #3d5ccf);
+  border: none;
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 0 #2e47a8, 0 10px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.backBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #2e47a8, 0 14px 24px rgba(0, 0, 0, 0.3);
+}
+
+.backBtn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #2e47a8;
+}
+
+.error {
+  font-size: 150px;
+} */
