@@ -1,8 +1,11 @@
 import { movieGenres } from "./Movie"
 
 let container = document.querySelector(".container")
+let bgBox = document.querySelector(".bg-box")
+
 export function DetailedMovie(item) {
-    container.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${item.backdrop_path})`;
+
+    bgBox.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${item.backdrop_path})`;
     let parentBox = document.createElement("div")
     parentBox.className = "parent-box"
     let bottomContainer = document.createElement("div")
@@ -72,6 +75,9 @@ export function DetailedMovie(item) {
         "Art: Scott Dougan",
         "Studios: Amazon MGM Studios"
     ];
+
+    console.log(data);
+
 
     data.forEach(elem => {
         const p = document.createElement("p");
