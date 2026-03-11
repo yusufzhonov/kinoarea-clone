@@ -76,5 +76,11 @@ export function Movie(item) {
     movieCard.appendChild(poster);
     movieCard.appendChild(movieInfo);
 
+    movieCard.onclick = () => {
+        localStorage.setItem('movieId', item.id)
+
+        window.location.href = "/movie"
+    }
+
     return movieCard
 }
