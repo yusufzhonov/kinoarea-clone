@@ -28,7 +28,7 @@
 
 /* навигация */
 .navigation {
-    color: #8ea2c8;
+    color: #ffffff;
     margin-bottom: 10px;
     font-size: 14px;
 }
@@ -44,7 +44,7 @@
 }
 
 .movie-small-title {
-    color: #a9b6d1;
+    color: #ffffff;
     margin-bottom: 20px;
 }
 
@@ -115,11 +115,11 @@ span{
 
 .small-data p {
     font-size: 14px;
+    color: #ffd84c;
 }
 
 /* выделенные значения */
 .small-data span {
-    color: #ffd84c;
 }
 
 
