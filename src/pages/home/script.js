@@ -9,7 +9,6 @@ import { api } from '../../libs/api';
 import { Movie } from "../../components/Movie";
 import { header } from '../../components/header';
 import { footer } from '../../components/footer';
-// import { genres } from '../../components/genres';
 import { Trailer } from '../../components/Trailer';
 import { genres } from '../../components/Genres';
 import { SearchMovie } from '../../components/searchMovie';
@@ -25,7 +24,6 @@ const swiper = new Swiper('.trailers__swiper', {
     slidesPerView: 4,
     spaceBetween: 20,
     grabCursor: true,
-    //   resistanceRatio: 0,
 
     freeMode: {
         enabled: true,
