@@ -18,8 +18,6 @@
 .bg-box {
     width: 100%;
     height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
 
     position: absolute;
     z-index: 10;
@@ -108,39 +106,81 @@ span {
 
 /* кнопка трейлера */
 .trailer-btn {
-    width: 250px;
-    height: 60px;
-    border: 2px solid #ffffff;
-    -webkit-box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 30px;
+    height: 56px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
     border-radius: 10px;
-    background: none;
+    background: rgba(255, 255, 255, 0.08);
     font-family: Qanelas, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 1;
     color: #ffffff;
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 30px;
+}
+
+.play-icon {
+    font-size: 14px;
+    color: #ffffff;
 }
 
 .trailer-btn:hover {
-    background: #2b3f6e;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #ffffff;
 }
 
 /* таблица данных */
+.bottomContainer {
+    padding: 30px 0;
+    margin-bottom: 50px;
+}
+
 .small-data {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px 40px;
+    gap: 0;
     color: #cdd7ec;
 }
 
-.small-data p {
+.small-data p.movie-parameters {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    font-size: 15px;
+    color: #ffffff;
+    padding: 14px 20px 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* нечётные — левая колонка, чётные — правая */
+.small-data p.movie-parameters:nth-child(odd) {
+    padding-right: 40px;
+}
+
+.small-data p.movie-parameters:nth-last-child(-n+2) {
+    border-bottom: none;
+}
+
+/* разделяем label и value внутри каждого <p> */
+.small-data p.movie-parameters::before {
+    content: attr(data-label);
+    min-width: 140px;
+    color: #8b9cc0;
+    font-weight: 500;
     font-size: 14px;
+    flex-shrink: 0;
+}
+
+.param-value {
     color: #ffd84c;
+    font-weight: 600;
 }
 
 
@@ -251,4 +291,171 @@ span {
 .search {
     position: absolute;
     right: 100px;
+}
+/* hero — секция с фоном фильма, только до описания */
+.hero {
+    position: relative;
+}
+
+/* Прозрачный хедер поверх фона */
+.hero header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    margin-bottom: 0;
+    z-index: 30;
+    padding: 20px 0;
+}
+
+/* Контент фильма — отступ сверху чтобы не уходить под хедер */
+.movie-content {
+    position: relative;
+    z-index: 20;
+    max-width: 1430px;
+    margin: 0 auto;
+    padding: 140px 20px 60px;
+}
+
+/* ── Sections below hero (colored background) ─────────────────────────────── */
+.movie-sections-container {
+    background-color: #1E2538;
+    padding-bottom: 60px;
+}
+
+.movie-sections-container .movie-section {
+    max-width: 1430px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+/* ── Общие секции ─────────────────────────────────────────────────────────── */
+.movie-section {
+    max-width: 1430px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 20;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.section-all-link {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.section-all-link:hover {
+    opacity: 1;
+}
+
+.section-subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 16px;
+}
+
+/* ── Starring ─────────────────────────────────────────────────────────────── */
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.cast-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cast-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #2b344b;
+}
+
+.cast-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.cast-char {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* ── Trailer ──────────────────────────────────────────────────────────────── */
+.trailer-box {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0f172a;
+}
+
+.trailer-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ── Posters ──────────────────────────────────────────────────────────────── */
+.posters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.poster-img {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.poster-img:hover {
+    transform: scale(1.02);
+}
+
+/* ── Photos ───────────────────────────────────────────────────────────────── */
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.photo-wrap {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.photo-img:hover {
+    transform: scale(1.02);
 }

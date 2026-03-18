@@ -18,69 +18,57 @@ export const movieGenres = {
     53: "Thriller",
     10752: "War",
     37: "Western"
-};
+}
+
 export function Movie(item) {
 
-    const movieCard = document.createElement("div");
-    movieCard.className = "movie-card";
+    const movieCard = document.createElement("div")
+    movieCard.className = "movie-card"
 
-    // poster
-    const poster = document.createElement("div");
-    poster.className = "poster";
+    const poster = document.createElement("div")
+    poster.className = "poster"
 
-    // img
-    const img = document.createElement("img");
+    const img = document.createElement("img")
     img.src = "https://image.tmdb.org/t/p/original" + item.poster_path
-    img.alt = item.original_title;
+    img.alt = item.original_title
 
-    // rating
-    const rating = document.createElement("div");
-    rating.className = "rating";
-    rating.textContent = item.vote_average.toFixed(1);
+    const rating = document.createElement("div")
+    rating.className = "rating"
+    rating.textContent = item.vote_average.toFixed(1)
 
-    // movie-info
-    const movieInfo = document.createElement("div");
-    movieInfo.className = "movie-info";
+    const movieInfo = document.createElement("div")
+    movieInfo.className = "movie-info"
 
-    // title
-    const title = document.createElement("h3");
-    title.textContent = item.title;
+    const title = document.createElement("h3")
+    title.textContent = item.title
 
-    // genres
-    const genres = document.createElement("p");
-    genres.className = "genres";
-    genres.textContent = item.genre_ids.map(id => movieGenres[id] || "Unknown");
+    const genres = document.createElement("p")
+    genres.className = "genres"
+    genres.textContent = item.genre_ids.map(id => movieGenres[id] || "Unknown")
 
-    // overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'overlay';
+    const overlay = document.createElement('div')
+    overlay.className = 'overlay'
 
-    // создаём кнопку
-    const button = document.createElement('button');
-    button.className = 'moreBtn';
-    button.textContent = 'More';
+    const button = document.createElement('button')
+    button.className = 'moreBtn'
+    button.textContent = 'More'
 
-    // вкладываем кнопку в overlay
-    overlay.appendChild(button);
+    overlay.appendChild(button)
 
-    // добавляем overlay в карточку
-    poster.appendChild(overlay);
+    poster.appendChild(overlay)
 
-    // собираем структуру
-    poster.appendChild(img);
-    poster.appendChild(rating);
+    poster.appendChild(img)
+    poster.appendChild(rating)
 
-    movieInfo.appendChild(title);
-    movieInfo.appendChild(genres);
+    movieInfo.appendChild(title)
+    movieInfo.appendChild(genres)
 
-    movieCard.appendChild(poster);
-    movieCard.appendChild(movieInfo);
+    movieCard.appendChild(poster)
+    movieCard.appendChild(movieInfo)
 
     movieCard.onclick = () => {
-        localStorage.setItem('movieId', item.id)
-
         window.location.href = "/movie"
+        localStorage.setItem("movieId", item.id)
     }
-
     return movieCard
 }

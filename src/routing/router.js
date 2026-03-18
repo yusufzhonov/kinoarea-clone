@@ -1,4 +1,4 @@
-import { notFound, routes } from "./routes"
+import { routes } from "./routes"
 
 export async function router() {
     const pathname = window.location.pathname
@@ -16,9 +16,10 @@ export async function router() {
 }
 
 async function renderNotFoundPage(app) {
-    console.log(notFound);
+    console.log(app);
 
-    await notFound.view(app)
-    await notFound.loadScripts()
-    await notFound.loadStyles()
+    const response = await fetch('src/pages/error/index.html')
+    const page = await response.text()
+
+    app.innerHTML = page
 }

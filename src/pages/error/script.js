@@ -1,5 +1,5 @@
-import { footer } from "../../components/footer";
-import { header } from "../../components/header";
+import { footer } from "../../components/footer"
+import { header } from "../../components/header"
 let backBtn = document.querySelector(".backBtn")
 backBtn.onclick =()=>{
     window.location.href ="/"

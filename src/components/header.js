@@ -1,8 +1,3 @@
-let close_search_window = document.querySelector(".close-search-window")
-let search_waindow = document.querySelector(".overhide")
-console.log(search_waindow);
-console.log(close_search_window);
-
 export function header() {
     let header = document.querySelector("header")
 
@@ -42,23 +37,32 @@ export function header() {
             </ul>
         </div>
     </div>`
+
     let headCn = document.querySelector(".head-cn")
-    const headerRight = document.createElement("div");
-    headerRight.className = "header-right";
-    
-    const searchBtn = document.createElement("button");
-    searchBtn.className = "search";
-    close_search_window.onclick = () => {
-        search_waindow.classList.remove("show")
-        search_waindow.classList.add("hide")
+    const headerRight = document.createElement("div")
+    headerRight.className = "header-right"
+
+    const searchBtn = document.createElement("button")
+    searchBtn.className = "search"
+
+    let close_search_window = document.querySelector(".close-search-window")
+    let search_waindow = document.querySelector(".overhide")
+
+    if (close_search_window) {
+        close_search_window.onclick = () => {
+            search_waindow.classList.remove("show")
+            search_waindow.classList.add("hide")
+        }
     }
+
     searchBtn.onclick = () => {
-        search_waindow.classList.add("show")
-        search_waindow.classList.remove("hide")
-            
-        console.log(1);
-        
+        let overlay = document.querySelector(".overhide")
+        if (overlay) {
+            overlay.classList.add("show")
+            overlay.classList.remove("hide")
+        }
     }
+
     const loginBtn = document.createElement("button");
     loginBtn.className = "login";
 

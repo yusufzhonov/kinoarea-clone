@@ -14,7 +14,6 @@ function changeType(type) {
     }
 
 }
-// changeType('movie')
 
 searchTypes.forEach((type, i) => {
     type.onclick = () => {

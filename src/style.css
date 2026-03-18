@@ -9,9 +9,7 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-
 }
-
 
 body {
     margin: 0;
@@ -24,71 +22,69 @@ body {
     max-width: 1430px;
     margin: 0 auto;
     /* padding: 40px 20px; */
-
-
 }
 
 .footer {
-  background: #0f172a;
-  padding: 60px 20px 50px;
-  text-align: center;
-  color: white;
-  position: relative;
+    background: #0f172a;
+    padding: 60px 20px 50px;
+    text-align: center;
+    color: white;
+    position: relative;
 }
 
 .footer__socials {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  margin-bottom: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 35px;
 }
 
 .footer__socials a {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background: #1e293b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
 .footer__socials a:hover {
-  background: #4f7cff;
+    background: #4f7cff;
 }
 
 .footer__menu {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin-bottom: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 35px;
 }
 
 .footer__menu a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
 }
 
 .footer__copyright {
-  color: #94a3b8;
-  margin-bottom: 15px;
-  font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 15px;
+    font-size: 14px;
 }
 
 .footer__links a {
-  color: #94a3b8;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 14px;
+    color: #94a3b8;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
 }
 
 .footer__links a:hover {
-  color: white;
+    color: white;
 }
 
 header {
@@ -108,78 +104,78 @@ header {
 /* LEFT */
 
 .header-left-top {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex-direction: column;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-direction: column;
 }
 
 .logo-title {
-  font-size: 19px;
-  font-weight: 800;
-  text-decoration: none;
-  color: #4c6fff;
+    font-size: 19px;
+    font-weight: 800;
+    text-decoration: none;
+    color: #4c6fff;
 
-  img {
-    width: 22px;
-    margin-right: 3px;
-  }
+    img {
+        width: 22px;
+        margin-right: 3px;
+    }
 }
 
 .logo-title span {
-  color: #ffffff;
-  font-size: 19px;
+    color: #ffffff;
+    font-size: 19px;
 }
 
 .header-left-top ul {
-  display: flex;
-  list-style: none;
-  gap: 15px;
+    display: flex;
+    list-style: none;
+    gap: 15px;
 }
 
 .logo-link {
-  img {
-    /* background-color: red; */
-    width: 18px;
-    height: 18px;
-    opacity: 0.8;
-    transition: 0.3s;
-  }
+    img {
+        /* background-color: red; */
+        width: 18px;
+        height: 18px;
+        opacity: 0.8;
+        transition: 0.3s;
+    }
 }
 
 .logo-link {
-  img:hover {
-    opacity: 1;
-  }
+    img:hover {
+        opacity: 1;
+    }
 }
 
 /* CENTER MENU */
 
 .header-menu {
-  display: flex;
-  list-style: none;
-  gap: 35px;
-  font-weight: 500px;
+    display: flex;
+    list-style: none;
+    gap: 35px;
+    font-weight: 500px;
 }
 
 .center-link {
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  transition: 0.3s;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
 }
 
 .center-link:hover {
-  color: #d1d5e0;
+    color: #d1d5e0;
 }
 
 /* RIGHT */
 
 .header-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .search {
@@ -195,25 +191,25 @@ header {
 }
 
 .search::before {
-  content: "🔍";
-  font-size: 16px;
+    content: "🔍";
+    font-size: 16px;
 }
 
 .login {
-  width: 100px;
-  height: 42px;
-  border-radius: 10px;
-  border: none;
-  background-color: #3657cb;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0px 0px 15px rgba(72, 113, 255, 0.8);
+    width: 100px;
+    height: 42px;
+    border-radius: 10px;
+    border: none;
+    background-color: #3657cb;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0px 0px 15px rgba(72, 113, 255, 0.8);
 }
 
 .login::before {
-  content: "Login";
+    content: "Login";
 }
 
 .login:hover {

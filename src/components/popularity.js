@@ -1,6 +1,6 @@
 export function popularPeople(item, arr) {
-    const leftBox = document.createElement('div');
-    leftBox.className = 'pop-left';
+    const leftBox = document.createElement('div')
+    leftBox.className = 'pop-left'
     leftBox.innerHTML = `
         <p class="pop-place">${arr.indexOf(item) + 1} Place</p>
         <img src= "https://image.tmdb.org/t/p/original${item.profile_path}" alt="" class="popular-people-img">
@@ -8,14 +8,14 @@ export function popularPeople(item, arr) {
         <h4 class="h4">${item.name}</h4>
         <p class="pop-name-p">${item.original_name}</p>
         </div>
-        `;
-    leftBox.querySelector(".pop-place").classList.add(`p-${arr.indexOf(item) + 1}`);
-    return leftBox;
+        `
+    leftBox.querySelector(".pop-place").classList.add(`p-${arr.indexOf(item) + 1}`)
+    return leftBox
 }
 
 export function popularPeoples(item, arr) {
-    const rightBox = document.createElement('div');
-    rightBox.className = 'pop-r-box';
+    const rightBox = document.createElement('div')
+    rightBox.className = 'pop-r-box'
     rightBox.innerHTML = `
     <img src= "https://image.tmdb.org/t/p/original${item.profile_path}" alt="" class="popular-people-img-right">
     <div class="pop-names-box">
@@ -24,6 +24,6 @@ export function popularPeoples(item, arr) {
         </div>
         <p class="pop-places">${arr.indexOf(item) + 3} Place</p>
         `;
-    rightBox.querySelector(".pop-places").classList.add(`p-${arr.indexOf(item) + 3}`);
-    return rightBox;
+    rightBox.querySelector(".pop-places").classList.add(`p-${arr.indexOf(item) + 3}`)
+    return rightBox
 }
