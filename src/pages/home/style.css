@@ -369,11 +369,6 @@ body {
     object-fit: cover;
     display: block;
     cursor: pointer;
-    transition: transform 0.35s ease;
-}
-
-.swiper-slide:hover img {
-    transform: scale(1.05);
 }
 
 .trailer-overlay {
@@ -400,12 +395,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s;
 }
 
 .swiper-slide:hover .trailer-play {
     background: rgba(255, 255, 255, 0.25);
-    transform: scale(1.1);
 }
 
 .swiper-slide__title {
@@ -711,7 +705,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    z-index: 2;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -727,4 +721,34 @@ body {
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
+}
+/* ─── Popular Movies Swiper ─── */
+.popular-movies-swiper {
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.popular-movies-swiper .swiper-wrapper {
+    align-items: stretch;
+}
+
+.popular-movies-swiper .swiper-slide {
+    height: auto;
+    box-sizing: border-box;
+}
+
+.popular-movies-swiper .movie-card {
+    width: 100%;
+    height: 100%;
+}
+
+/* стрелки */
+.popular-movies-page-btns img {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    user-select: none;
+}
+
+.popular-movies-page-btns img:hover {
+    opacity: 0.7;
 }
