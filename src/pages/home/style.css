@@ -567,10 +567,22 @@ body {
 }
 
 .upcoming-movies-box {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+    overflow: hidden;
     margin-bottom: 50px;
+}
+
+.upcoming-movies-swiper .swiper-wrapper {
+    align-items: stretch;
+}
+
+.upcoming-movies-swiper .swiper-slide {
+    height: auto;
+    box-sizing: border-box;
+}
+
+.upcoming-movies-swiper .movie-card {
+    width: 100%;
+    height: 100%;
 }
 
 .upcoming-upper-box {
@@ -593,108 +605,6 @@ body {
     font-size: 18px;
     font-weight: 600;
     gap: 23px;
-}
-
-/* form */
-.search-container {
-    display: flex;
-    position: absolute;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    top: 0;
-}
-
-.search-container input {
-    flex: 1;
-    border: none;
-    padding: 20px 40px;
-    width: 600px;
-    border-radius: 10px;
-    font-size: 16px;
-    outline: none;
-    color: black;
-    font-weight: 700;
-}
-
-.search-btn {
-    width: 50px;
-    height: 48px;
-    border: none;
-    background: #ffec00;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    transition: background 0.2s;
-    border-radius: 10px;
-    /* left: 2700px; */
-    position: absolute;
-    left: 240px;
-    top: -54px;
-}
-
-.search-container button:hover {
-    background: #ffe400;
-}
-
-.serch-logo-title {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    font-size: 25px;
-    font-weight: 800;
-    text-decoration: none;
-    color: #4c6fff;
-    
-    img {
-        width: 30px;
-        margin-right: 3px;
-    }
-}
-
-.serch-logo-title span {
-    color: #ffffff;
-    font-size: 25px;
-}
-
-
-.overhide {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease;
-    opacity: 1;
-}
-
-.close-search-window {
-    width: 30px;
-    position: absolute;
-    left: 320px;
-    top: -45px;
-}
-
-
-.search-box {
-    display: flex;
-    position: relative;
-}
-
-.hide {
-    display: none;
-}
-
-.show {
-    display: flex;
 }
 
 .overlay {

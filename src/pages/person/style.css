@@ -1,0 +1,359 @@
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.person-hero {
+    padding: 30px 0 60px;
+}
+
+.person-hero-inner {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+
+/* ── Photo — bigger ──────────────────────────────────────────────────────── */
+.person-photo-wrap {
+    flex-shrink: 0;
+    width: 360px;
+}
+
+.person-photo {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 14px;
+    display: block;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+}
+
+/* ── Right column ────────────────────────────────────────────────────────── */
+.person-right {
+    flex: 1;
+    color: #fff;
+    padding-top: 10px;
+}
+
+/* Breadcrumb */
+.person-breadcrumb {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 14px;
+}
+.person-breadcrumb span { color: #fff; }
+
+/* Name */
+.person-name {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 22px;
+    line-height: 1.1;
+    color: #fff;
+}
+
+/* ── Share buttons ───────────────────────────────────────────────────────── */
+.person-share-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.person-share-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #2b344b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.person-share-btn img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+}
+
+.person-share-btn:hover {
+    background: #3657cb;
+}
+.person-share-btn:hover img {
+    opacity: 1;
+}
+
+/* ── Information ─────────────────────────────────────────────────────────── */
+.person-info-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+.person-info-table {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 30px;
+}
+
+.person-info-row {
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+    font-size: 15px;
+}
+
+.person-info-label {
+    color: #94a3b8;
+    min-width: 140px;
+    flex-shrink: 0;
+}
+
+.person-info-value {
+    color: #f0c040;
+    font-weight: 500;
+}
+
+/* ── Action buttons ──────────────────────────────────────────────────────── */
+.person-action-row {
+    display: flex;
+    gap: 12px;
+}
+
+.person-action-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    border: none;
+    background: #2b344b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.person-action-btn:hover { background: #3657cb; }
+
+/* ── Sections ────────────────────────────────────────────────────────────── */
+.person-sections-container {
+    padding: 50px 0 80px;
+}
+
+.person-section {
+    margin-bottom: 70px;
+}
+
+.person-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.person-section-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.person-section-pager {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* ── Best films grid — 5 per row ─────────────────────────────────────────── */
+.person-best-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.person-best-card {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+/* poster wrap with hover overlay — same as movie-in-theaters */
+.person-best-poster-wrap {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    margin-bottom: 12px;
+}
+
+.person-best-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.person-best-card:hover .person-best-poster {
+    filter: brightness(0.85);
+}
+
+.person-best-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #2ecc71;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 4px 10px;
+    border-radius: 7px;
+    z-index: 2;
+}
+
+/* hover overlay */
+.person-best-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(90, 160, 255, 0.6);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+}
+
+.person-best-card:hover .person-best-overlay {
+    opacity: 1;
+}
+
+.person-best-more-btn {
+    background: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.person-best-info {
+    padding: 0 2px;
+}
+
+.person-best-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.person-best-genres {
+    font-size: 12px;
+    color: #f0c040;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Filmography list ────────────────────────────────────────────────────── */
+.person-film-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.person-film-row {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 18px 16px;
+    transition: background 0.2s;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.person-film-row:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.person-film-poster {
+    width: 150px;
+    height: 215px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.person-film-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.person-film-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.person-film-genres {
+    font-size: 14px;
+    color: #f0c040;
+}
+
+.person-film-rating-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.person-film-rating {
+    background: #2ecc71;
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    min-width: 70px;
+    text-align: center;
+    display: block;
+}
+
+.person-film-rating-label {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.person-film-more-btn {
+    background: #3657cb;
+    color: #fff;
+    border: none;
+    padding: 16px 44px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+.person-film-more-btn:hover { background: #2a44a8; }
+
+.person-film-divider {
+    height: 1px;
+    background: #2b344b;
+    width: 100%;
+}
+

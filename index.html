@@ -5,12 +5,10 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/tmdb-sp3/public/cinema.png" />
   <meta http-equiv="Permissions-Policy" content="compute-pressure=()">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./src/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
-
   <title>Kinoarea</title>
 </head>
 
@@ -18,27 +16,39 @@
 
   <div id="app">
 
+    <!-- Search overlay -->
     <div class="overhide hide">
+      <div class="search-overlay-inner">
 
-      <div class="search-container">
-        
-        <a href="/" class="serch-logo-title"><img src="https://kinoarea.com/front/img/logo-icon.svg" width="30px"
-          height="30px" alt="">Kino<span>area</span></a>
-          
-          <input type="text" placeholder="Search" class="search-content" id="search-content" name="searching">
-          <div class="search-box">
-            
-            <button class="search-btn">🔍</button>
-            <img src="https://kinoarea.com/front/img/icons/close-menu.svg" alt="" class="close-search-window">
+        <!-- Top bar: logo + input + close -->
+        <div class="search-topbar">
+          <a href="/" class="search-logo">
+            <img src="https://kinoarea.com/front/img/logo-icon.svg" width="28px" height="28px" alt="">
+            Kino<span>area</span>
+          </a>
+          <div class="search-input-wrap">
+            <svg class="search-icon-inside" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Movie, series, person..." class="search-content" id="search-content" name="searching" autocomplete="off">
           </div>
-          
+          <button class="search-close-btn" aria-label="Close search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
         </div>
 
+        <!-- Filter tabs -->
+        <div class="search-tabs">
+          <button class="search-tab active" data-type="movie">Movies</button>
+          <button class="search-tab" data-type="tv">TV Series</button>
+          <button class="search-tab" data-type="person">People</button>
+        </div>
+
+        <!-- Results -->
+        <div class="render-box" id="search-results"></div>
+
       </div>
+    </div>
 
   </div>
-
-
 
   <script type="module" src="/src/main.js"></script>
 </body>

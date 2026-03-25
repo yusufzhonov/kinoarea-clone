@@ -104,7 +104,7 @@ export function DetailedMovie(item) {
     bottomContainer.append(smallData)
     container.append(parentBox, bottomContainer)
 
-    // ── Starring ──────────────────────────────────────────────────────────────
+    // Starring
     const castSection = document.createElement("section")
     castSection.className = "movie-section"
 
@@ -154,11 +154,18 @@ export function DetailedMovie(item) {
             card.appendChild(photo)
             card.appendChild(actorName)
             card.appendChild(charName)
+
+            card.style.cursor = "pointer"
+            card.onclick = () => {
+                localStorage.setItem("personId", actor.id)
+                window.location.href = "/person"
+            }
+
             castGrid.appendChild(card)
         })
     })
 
-    //Trailer
+    // Trailer
     const trailerSection = document.createElement("section")
     trailerSection.className = "movie-section"
 
@@ -203,7 +210,7 @@ export function DetailedMovie(item) {
         trailerSection.scrollIntoView({ behavior: "smooth" })
     }
 
-    //Movie posters + Photos from the movi
+    // Movie posters + Photos from the movi
     api.get(`/movie/${item.id}/images`).then(res => {
         const seenPosters = new Set()
         const posters = res.data.posters
@@ -229,7 +236,7 @@ export function DetailedMovie(item) {
             })
             .slice(0, 4)
 
-        //Posters
+        // Posters
         if (posters.length > 0) {
             const postersSection = document.createElement("section")
             postersSection.className = "movie-section"
@@ -270,7 +277,7 @@ export function DetailedMovie(item) {
             sectionsContainer.appendChild(postersSection)
         }
 
-        //Photos
+        // Photos
         if (backdrops.length > 0) {
             const photosSection = document.createElement("section")
             photosSection.className = "movie-section"

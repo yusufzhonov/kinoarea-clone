@@ -12,8 +12,6 @@ import { header } from '../../components/header'
 import { footer } from '../../components/footer'
 import { Trailer } from '../../components/Trailer'
 import { genres } from '../../components/genres'
-import { SearchMovie } from '../../components/searchMovie'
-import { searchPerson } from '../../components/searchPerson'
 
 header()
 footer()
@@ -23,7 +21,7 @@ let popular_people_box2 = document.querySelector(".pop-people-right-box")
 let cardBox     = document.querySelector(".card-box")
 let geanre_list = document.querySelector(".genre-list")
 
-// ─── Popular Movies: box → swiper ─────────────────────────────────────────
+// Popular Movies swiper
 
 const POPULAR_TOTAL    = 16
 const POPULAR_PER_VIEW = 4
@@ -38,10 +36,7 @@ popularContainer.appendChild(popularWrapper)
 let popularSwiper = null
 
 function buildPopularSwiper(movies) {
-    if (popularSwiper) {
-        popularSwiper.destroy(true, true)
-        popularSwiper = null
-    }
+    if (popularSwiper) { popularSwiper.destroy(true, true); popularSwiper = null }
     popularWrapper.innerHTML = ""
     movies.slice(0, POPULAR_TOTAL).forEach(item => {
         popularWrapper.appendChild(PopularMovieSlide(item))
@@ -62,23 +57,55 @@ function updatePopularPageLabel() {
     el.textContent = Math.floor(popularSwiper.activeIndex / POPULAR_PER_VIEW) + 1
 }
 
-// ─── DOM refs ──────────────────────────────────────────────────────────────
+// Upcoming Movies swiper
+
+const UPCOMING_TOTAL    = 6
+const UPCOMING_PER_VIEW = 3
+
+let upcomingContainer = document.querySelector(".upcoming-movies-box")
+upcomingContainer.classList.add("swiper", "upcoming-movies-swiper")
+
+let upcomingWrapper = document.createElement("div")
+upcomingWrapper.className = "swiper-wrapper"
+upcomingContainer.appendChild(upcomingWrapper)
+
+let upcomingSwiper = null
+
+function buildUpcomingSwiper(movies) {
+    if (upcomingSwiper) { upcomingSwiper.destroy(true, true); upcomingSwiper = null }
+    upcomingWrapper.innerHTML = ""
+    movies.slice(0, UPCOMING_TOTAL).forEach(item => {
+        upcomingWrapper.appendChild(PopularMovieSlide(item))
+    })
+    upcomingSwiper = new Swiper(".upcoming-movies-swiper", {
+        modules: [FreeMode],
+        slidesPerView: UPCOMING_PER_VIEW,
+        spaceBetween: 20,
+        speed: 500,
+        grabCursor: true,
+        loop: false,
+    })
+}
+
+function updateUpcomingPageLabel() {
+    const el = document.querySelector(".upcoming-movies-page")
+    if (!el || !upcomingSwiper) return
+    el.textContent = Math.floor(upcomingSwiper.activeIndex / UPCOMING_PER_VIEW) + 1
+}
+
+// DOM refs
 
 let popular_movies_next_btn = document.querySelector(".popular-movies-next-btn")
 let popular_movies_last_btn = document.querySelector(".popular-movies-last-btn")
 let popular_movies_page_p   = document.querySelector(".popular-movies-page-p")
 
-let upcomig_movies_box      = document.querySelector(".upcoming-movies-box")
-let upcomig_movies_next_btn = document.querySelector(".upcoming-movies-next-btn")
-let upcomig_movies_last_btn = document.querySelector(".upcoming-movies-last-btn")
-let upcomig_movies_page_p   = document.querySelector(".upcoming-movies-page-p")
+let upcoming_movies_next_btn = document.querySelector(".upcoming-movies-next-btn")
+let upcoming_movies_last_btn = document.querySelector(".upcoming-movies-last-btn")
+let upcoming_movies_page_p   = document.querySelector(".upcoming-movies-page-p")
 
-let trailerSwiperWrapper    = document.querySelector(".trailers__swiper .swiper-wrapper")
+let trailerSwiperWrapper = document.querySelector(".trailers__swiper .swiper-wrapper")
 
-let upcomingPage       = 1
-let upcomingTotalPages = 1
-
-// ─── Загрузка ──────────────────────────────────────────────────────────────
+// API calls
 
 Promise.all([
     api.get("/person/popular"),
@@ -86,26 +113,27 @@ Promise.all([
     api.get("/genre/movie/list"),
     api.get("/movie/upcoming"),
 ])
-.then(([personRes, popularMovieRes, genresRes, upcomigMovieRes]) => {
+.then(([personRes, popularMovieRes, genresRes, upcomingMovieRes]) => {
 
     render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
     render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
     render(popularMovieRes.data.results, cardBox, Movie)
 
+    // Popular swiper
     buildPopularSwiper(popularMovieRes.data.results)
-
-    const totalGroups = POPULAR_TOTAL / POPULAR_PER_VIEW
+    const totalPopularGroups = Math.ceil(POPULAR_TOTAL / POPULAR_PER_VIEW)
     popular_movies_page_p.innerHTML =
-        `<span class="popular-movies-page">1</span>/${totalGroups}`
+        `<span class="popular-movies-page">1</span>/${totalPopularGroups}`
 
-    upcomingTotalPages = Math.min(upcomigMovieRes.data.total_pages, 10)
-    upcomig_movies_page_p.innerHTML =
-        `<span class="upcoming-movies-page">1</span>/${upcomingTotalPages}`
+    // Upcoming swiper
+    buildUpcomingSwiper(upcomingMovieRes.data.results)
+    const totalUpcomingGroups = Math.ceil(UPCOMING_TOTAL / UPCOMING_PER_VIEW)
+    upcoming_movies_page_p.innerHTML =
+        `<span class="upcoming-movies-page">1</span>/${totalUpcomingGroups}`
 
-    render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
-
+    // Trailers swiper
     render(
-        upcomigMovieRes.data.results.filter(m => m.backdrop_path).slice(0, 10),
+        upcomingMovieRes.data.results.filter(m => m.backdrop_path).slice(0, 10),
         trailerSwiperWrapper,
         Trailer
     )
@@ -133,7 +161,7 @@ Promise.all([
     render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
 })
 
-// ─── Popular Movies стрелки ────────────────────────────────────────────────
+// Popular Movies arrows
 
 popular_movies_next_btn.onclick = () => {
     if (!popularSwiper) return
@@ -146,49 +174,29 @@ popular_movies_next_btn.onclick = () => {
 popular_movies_last_btn.onclick = () => {
     if (!popularSwiper) return
     popularSwiper.slideTo(
-        popularSwiper.isBeginning ? POPULAR_TOTAL - POPULAR_PER_VIEW : popularSwiper.activeIndex - POPULAR_PER_VIEW
+        popularSwiper.isBeginning
+            ? POPULAR_TOTAL - POPULAR_PER_VIEW
+            : popularSwiper.activeIndex - POPULAR_PER_VIEW
     )
     setTimeout(updatePopularPageLabel, 520)
 }
 
-// ─── Upcoming стрелки ──────────────────────────────────────────────────────
+// Upcoming Movies arrows
 
-upcomig_movies_next_btn.onclick = () => {
-    if (upcomingPage >= upcomingTotalPages) return
-    upcomingPage++
-    document.querySelector(".upcoming-movies-page").textContent = upcomingPage
-    api.get(`/movie/upcoming?page=${upcomingPage}`)
-        .then(res => render(res.data.results.slice(0, 4), upcomig_movies_box, Movie))
+upcoming_movies_next_btn.onclick = () => {
+    if (!upcomingSwiper) return
+    upcomingSwiper.slideTo(
+        upcomingSwiper.isEnd ? 0 : upcomingSwiper.activeIndex + UPCOMING_PER_VIEW
+    )
+    setTimeout(updateUpcomingPageLabel, 520)
 }
 
-upcomig_movies_last_btn.onclick = () => {
-    if (upcomingPage <= 1) return
-    upcomingPage--
-    document.querySelector(".upcoming-movies-page").textContent = upcomingPage
-    api.get(`/movie/upcoming?page=${upcomingPage}`)
-        .then(res => render(res.data.results.slice(0, 4), upcomig_movies_box, Movie))
+upcoming_movies_last_btn.onclick = () => {
+    if (!upcomingSwiper) return
+    upcomingSwiper.slideTo(
+        upcomingSwiper.isBeginning
+            ? UPCOMING_TOTAL - UPCOMING_PER_VIEW
+            : upcomingSwiper.activeIndex - UPCOMING_PER_VIEW
+    )
+    setTimeout(updateUpcomingPageLabel, 520)
 }
-
-// ─── Search ────────────────────────────────────────────────────────────────
-
-let searchTypes   = document.querySelectorAll(".type")
-let searchInp     = document.querySelector(".search-content")
-let searchResults = document.querySelector(".render-box")
-
-function changeType(type) {
-    searchInp.onkeyup = () => {
-        api.get(`/search/${type}?query=${searchInp.value}`)
-            .then(res => {
-                if (type === "movie") {
-                    render(Object.values(res.data.results), searchResults, SearchMovie)
-                } else if (type === "person") {
-                    render(Object.values(res.data.results), searchResults, searchPerson)
-                } else {
-                    render(Object.values(res.data.results), searchResults, SearchMovie)
-                }
-            })
-    }
-}
-
-changeType("movie")
-searchTypes.forEach(type => { type.onclick = () => changeType(type.id) })

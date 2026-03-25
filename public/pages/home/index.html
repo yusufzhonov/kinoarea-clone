@@ -199,27 +199,30 @@
     </div>
 
     <div class="overhide hide">
-        <div class="search-container">
-
-            <a href="/" class="serch-logo-title"><img src="https://kinoarea.com/front/img/logo-icon.svg" width="30px"
-                    height="30px" alt="">Kino<span>area</span></a>
-
-            <input type="text" placeholder="Search" class="search-content" id="search-content" name="searching">
-            <div class="search-box">
-
-                <button class="search-btn">🔍</button>
-                <img src="https://kinoarea.com/front/img/icons/close-menu.svg" alt="" class="close-search-window">
-            </div>
-            <div class="search-type-box">
-                <div class="type" id="movie">Movies</div>
-                <div class="type" id="tv">TV</div>
-                <div class="type" id="person">People</div>
-            </div>
-            <div class="render-box">
-                
-            </div>
-        </div>
-
+  <div class="search-container">
+    <a href="/" class="serch-logo-title">
+      <img src="https://kinoarea.com/front/img/logo-icon.svg" width="30px" height="30px" alt="">
+      Kino<span>area</span>
+    </a>
+    <div class="search-box">
+      <input type="text" placeholder="Search" class="search-content" id="search-content" name="searching" autocomplete="off">
+      <button class="search-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="search-close-btn" aria-label="Close search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-type-box">
+      <div class="search-tab active" data-type="movie">Movies</div>
+      <div class="search-tab" data-type="tv">TV</div>
+      <div class="search-tab" data-type="person">People</div>
+    </div>
+    <div class="render-box" id="search-results"></div>
+  </div>
+</div>
+  </div>
+</div>
 
     </div>
 
@@ -247,7 +250,7 @@
 
             <div class="upcoming-movies-page-btns">
                 <img src="https://kinoarea.com/front/img/icons/arrow-left.svg" alt="" class="upcoming-movies-last-btn">
-                <p class="upcoming-movies-page-p"><span class="upcoming-movies-page">1</span>/3</p>
+                <p class="upcoming-movies-page-p"><span class="upcoming-movies-page">1</span>/2</p>
                 <img src="https://kinoarea.com/front/img/icons/arrow-right.svg" alt="" class="upcoming-movies-next-btn">
             </div>
         </div>
