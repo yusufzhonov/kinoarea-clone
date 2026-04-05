@@ -45,11 +45,44 @@ export function DetailedMovie(item) {
     const diagrams = document.createElement("div")
     diagrams.className = "diagrams"
 
-    for (let i = 0; i < 3; i++) {
+    // Circular rating
+    const rating = item.vote_average ? item.vote_average.toFixed(1) : "—"
+    const ratingVal = parseFloat(rating) || 0
+    const radius = 22
+    const circumference = 2 * Math.PI * radius
+    const offset = circumference - (ratingVal / 10) * circumference
+    let ratingColor = "#e74c3c"
+    if (ratingVal >= 7) ratingColor = "#2ecc71"
+    else if (ratingVal >= 5) ratingColor = "#f0c040"
+
+    const ratingBtn = document.createElement("div")
+    ratingBtn.className = "diagram-rating"
+    ratingBtn.innerHTML = `
+        <svg width="56" height="56" viewBox="0 0 56 56">
+            <circle cx="28" cy="28" r="${radius}" fill="#1d2a44" stroke="#2b3d5c" stroke-width="4"/>
+            <circle cx="28" cy="28" r="${radius}" fill="none" stroke="${ratingColor}" stroke-width="4"
+                stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"
+                stroke-linecap="round" transform="rotate(-90 28 28)"/>
+        </svg>
+        <span class="diagram-rating-val">${rating}</span>
+    `
+
+    // Action buttons
+    const actions = [
+        { icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`, title: "Watchlist" },
+        { icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`, title: "Favourite" },
+        { icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`, title: "Rate" },
+    ]
+
+    actions.forEach(({ icon, title }) => {
         const btn = document.createElement("button")
         btn.className = "diagram-btns"
+        btn.title = title
+        btn.innerHTML = icon
         diagrams.appendChild(btn)
-    }
+    })
+
+    diagrams.insertBefore(ratingBtn, diagrams.firstChild)
 
     const description = document.createElement("p")
     description.className = "description"
@@ -117,7 +150,7 @@ export function DetailedMovie(item) {
 
     const castAllLink = document.createElement("a")
     castAllLink.className = "section-all-link"
-    castAllLink.href = "#"
+    castAllLink.href = "/movie/actors"
     castAllLink.textContent = "All actors →"
 
     castHeader.appendChild(castTitle)
@@ -178,7 +211,7 @@ export function DetailedMovie(item) {
 
     const trailerAllLink = document.createElement("a")
     trailerAllLink.className = "section-all-link"
-    trailerAllLink.href = "#"
+    trailerAllLink.href = "/movie/trailers"
     trailerAllLink.textContent = "All trailers →"
 
     trailerHeader.appendChild(trailerSectionTitle)
@@ -250,7 +283,7 @@ export function DetailedMovie(item) {
 
             const postersAllLink = document.createElement("a")
             postersAllLink.className = "section-all-link"
-            postersAllLink.href = "#"
+            postersAllLink.href = "/movie/posters"
             postersAllLink.textContent = "All posters →"
 
             postersHeader.appendChild(postersSectionTitle)
@@ -291,7 +324,7 @@ export function DetailedMovie(item) {
 
             const photosAllLink = document.createElement("a")
             photosAllLink.className = "section-all-link"
-            photosAllLink.href = "#"
+            photosAllLink.href = "/movie/photos"
             photosAllLink.textContent = "All photos →"
 
             photosHeader.appendChild(photosSectionTitle)

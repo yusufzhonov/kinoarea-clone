@@ -1,0 +1,305 @@
+/* ── Layout ────────────────────────────────────────────────────────────────── */
+.media-page {
+    background: #1E2538;
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────────── */
+.media-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 30px 20px 40px;
+}
+
+.media-title {
+    font-size: 52px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+.media-breadcrumb {
+    font-size: 14px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.media-breadcrumb-link {
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.media-breadcrumb-link:hover { color: #fff; }
+.media-breadcrumb-sep { color: #94a3b8; }
+.media-breadcrumb span:last-child { color: #fff; }
+
+/* ── Tabs ──────────────────────────────────────────────────────────────────── */
+.media-tabs {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.media-tab {
+    font-size: 18px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+}
+
+.media-tab:hover { color: #fff; }
+
+.media-tab--active {
+    color: #fff;
+    border-bottom-color: #3657cb;
+}
+
+/* ── Content ───────────────────────────────────────────────────────────────── */
+.media-content {
+    padding: 0 20px;
+}
+
+/* ── Section ───────────────────────────────────────────────────────────────── */
+.media-section {
+    margin-bottom: 80px;
+    scroll-margin-top: 80px;
+}
+
+.media-section-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 28px;
+}
+
+/* ── Trailers grid (2 columns, thumbnail + title/date below) ──────────────── */
+.media-trailers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 24px;
+}
+
+.media-trailer-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.media-trailer-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+}
+
+.media-trailer-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.media-trailer-thumb:hover .media-trailer-img {
+    transform: scale(1.03);
+}
+
+.media-trailer-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.media-trailer-thumb:hover .media-trailer-play {
+    opacity: 0.85;
+}
+
+.media-trailer-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.media-trailer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0 0;
+    gap: 12px;
+}
+
+.media-trailer-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.media-trailer-date {
+    font-size: 14px;
+    color: #94a3b8;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ── Posters grid (4 columns) ──────────────────────────────────────────────── */
+.media-posters-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.media-poster-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.media-poster-img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.media-poster-card:hover .media-poster-img {
+    transform: scale(1.02);
+}
+
+.media-poster-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Photos grid (2 columns) ───────────────────────────────────────────────── */
+.media-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.media-photo-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.media-photo-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.media-photo-card:hover .media-photo-img {
+    transform: scale(1.02);
+}
+
+.media-photo-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Lightbox ───────────────────────────────────────────────────────────────── */
+.media-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: lbFadeIn 0.2s ease;
+}
+
+@keyframes lbFadeIn {
+    from { opacity: 0 }
+    to   { opacity: 1 }
+}
+
+.media-lightbox-inner {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+
+.media-lightbox-close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+}
+.media-lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+.media-lightbox-prev,
+.media-lightbox-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+}
+.media-lightbox-prev { left: 16px; }
+.media-lightbox-next { right: 16px; }
+.media-lightbox-prev:hover,
+.media-lightbox-next:hover { background: rgba(255,255,255,0.25); }

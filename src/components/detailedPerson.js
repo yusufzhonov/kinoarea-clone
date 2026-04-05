@@ -1,3 +1,6 @@
+import Swiper from 'swiper'
+import { FreeMode } from 'swiper/modules'
+import 'swiper/css'
 import { api } from "../libs/api"
 import { movieGenres } from "./Movie"
 
@@ -140,9 +143,14 @@ export function DetailedPerson(item) {
             .slice(0, 10)
 
         if (bestMovies.length > 0) {
+            const BEST_PER_VIEW = 4
+            const BEST_TOTAL_STEPS = Math.min(Math.ceil(bestMovies.length / BEST_PER_VIEW), 4)
+            const BEST_STEP = Math.ceil(bestMovies.length / BEST_TOTAL_STEPS)
+
             const bestSection = document.createElement("section")
             bestSection.className = "person-section"
 
+            // ── Header ──────────────────────────────────────────────────────
             const bestHeader = document.createElement("div")
             bestHeader.className = "person-section-header container"
 
@@ -150,17 +158,44 @@ export function DetailedPerson(item) {
             bestTitle.className = "person-section-title"
             bestTitle.textContent = "Best films"
 
-            const bestPager = document.createElement("span")
-            bestPager.className = "person-section-pager"
-            bestPager.textContent = "1 / 1"
+            const totalGroups = BEST_TOTAL_STEPS
+
+            const bestPagerWrap = document.createElement("div")
+            bestPagerWrap.className = "person-best-pager-wrap"
+
+            const prevBtn = document.createElement("button")
+            prevBtn.className = "person-best-arrow person-best-arrow--prev"
+            prevBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>'
+
+            const pagerLabel = document.createElement("span")
+            pagerLabel.className = "person-best-pager-label"
+            pagerLabel.innerHTML = '<span class="person-best-page">1</span>/' + totalGroups
+
+            const nextBtn = document.createElement("button")
+            nextBtn.className = "person-best-arrow person-best-arrow--next"
+            nextBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
+
+            bestPagerWrap.appendChild(prevBtn)
+            bestPagerWrap.appendChild(pagerLabel)
+            bestPagerWrap.appendChild(nextBtn)
 
             bestHeader.appendChild(bestTitle)
-            bestHeader.appendChild(bestPager)
+            bestHeader.appendChild(bestPagerWrap)
 
-            const bestGrid = document.createElement("div")
-            bestGrid.className = "person-best-grid container"
+            // ── Swiper container ─────────────────────────────────────────────
+            const swiperOuter = document.createElement("div")
+            swiperOuter.className = "container"
+
+            const swiperEl = document.createElement("div")
+            swiperEl.className = "swiper person-best-swiper"
+
+            const swiperWrapper = document.createElement("div")
+            swiperWrapper.className = "swiper-wrapper"
 
             bestMovies.forEach(function(m) {
+                const slide = document.createElement("div")
+                slide.className = "swiper-slide"
+
                 const card = document.createElement("div")
                 card.className = "person-best-card"
                 card.style.cursor = "pointer"
@@ -181,7 +216,6 @@ export function DetailedPerson(item) {
                 badge.className = "person-best-rating"
                 badge.textContent = m.vote_average.toFixed(1)
 
-                // hover overlay
                 const overlay = document.createElement("div")
                 overlay.className = "person-best-overlay"
                 const moreBtn = document.createElement("button")
@@ -208,12 +242,53 @@ export function DetailedPerson(item) {
                 info.appendChild(genresEl)
                 card.appendChild(posterWrap)
                 card.appendChild(info)
-                bestGrid.appendChild(card)
+                slide.appendChild(card)
+                swiperWrapper.appendChild(slide)
             })
 
+            swiperEl.appendChild(swiperWrapper)
+            swiperOuter.appendChild(swiperEl)
+
             bestSection.appendChild(bestHeader)
-            bestSection.appendChild(bestGrid)
+            bestSection.appendChild(swiperOuter)
             sectionsContainer.appendChild(bestSection)
+
+            // ── Init Swiper ──────────────────────────────────────────────────
+            const bestSwiper = new Swiper(swiperEl, {
+                modules: [FreeMode],
+                slidesPerView: BEST_PER_VIEW,
+                spaceBetween: 20,
+                speed: 500,
+                grabCursor: true,
+                loop: false,
+            })
+
+            let currentStep = 1
+
+            function updateBestPageLabel() {
+                const pageEl = swiperEl.closest(".person-section").querySelector(".person-best-page")
+                if (pageEl) pageEl.textContent = currentStep
+            }
+
+            nextBtn.onclick = function() {
+                if (currentStep < BEST_TOTAL_STEPS) {
+                    currentStep++
+                } else {
+                    currentStep = 1
+                }
+                bestSwiper.slideTo((currentStep - 1) * BEST_STEP)
+                setTimeout(updateBestPageLabel, 520)
+            }
+
+            prevBtn.onclick = function() {
+                if (currentStep > 1) {
+                    currentStep--
+                } else {
+                    currentStep = BEST_TOTAL_STEPS
+                }
+                bestSwiper.slideTo((currentStep - 1) * BEST_STEP)
+                setTimeout(updateBestPageLabel, 520)
+            }
         }
 
         // Filmography list — max 10

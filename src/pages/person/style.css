@@ -169,11 +169,45 @@
     color: #fff;
 }
 
-/* ── Best films grid — 5 per row ─────────────────────────────────────────── */
-.person-best-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+/* ── Best films swiper ───────────────────────────────────────────────────── */
+.person-best-swiper {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ── Pager / arrows (mirrors popular-movies-page-btns on home) ───────────── */
+.person-best-pager-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.person-best-pager-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    min-width: 48px;
+    text-align: center;
+}
+
+.person-best-arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #2b344b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.person-best-arrow:hover {
+    background: #3657cb;
 }
 
 .person-best-card {

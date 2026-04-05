@@ -30,13 +30,13 @@ export function header() {
         </div>
         <div class="header-center">
             <ul class="header-menu">
-                <li><a href="/" class="center-link">Premiere</a></li>
-                <li><a href="/" class="center-link">Films</a></li>
-                <li><a href="/" class="center-link">Media</a></li>
-                <li><a href="/" class="center-link">Persons</a></li>
-                <li><a href="/" class="center-link">Collections</a></li>
-                <li><a href="/" class="center-link">Upcoming</a></li>
-                <li><a href="/" class="center-link">Search</a></li>
+                <li><a href="/premiere" class="center-link" onclick="event.preventDefault();window.location.href='/premiere'">Premiere</a></li>
+                <li><a href="/films" class="center-link" onclick="event.preventDefault();window.location.href='/films'">Films</a></li>
+                <li><a href="/media" class="center-link" onclick="event.preventDefault();window.location.href='/media'">Media</a></li>
+                <li><a href="/persons" class="center-link" onclick="event.preventDefault();window.location.href='/persons'">Persons</a></li>
+                <li><a href="/collections" class="center-link" onclick="event.preventDefault();window.location.href='/collections'">Collections</a></li>
+                <li><a href="/upcoming" class="center-link" onclick="event.preventDefault();window.location.href='/upcoming'">Upcoming</a></li>
+                <li><a href="#" class="center-link" id="header-search-link">Search</a></li>
             </ul>
         </div>
     </div>`
@@ -103,6 +103,26 @@ export function header() {
                 render(items.slice(0, 10), resultsEl, SearchMovie)
             }
         })
+    }
+
+    // Highlight active nav link
+    const currentPath = window.location.pathname
+    document.querySelectorAll(".header-menu .center-link").forEach(link => {
+        const href = link.getAttribute("href")
+        if (href && href !== "#" && currentPath.startsWith(href)) {
+            link.style.color = "#fff"
+            link.style.borderBottom = "2px solid #3657cb"
+            link.style.paddingBottom = "2px"
+        }
+    })
+
+    // Open search on nav "Search" link click
+    const searchNavLink = document.getElementById("header-search-link")
+    if (searchNavLink) {
+        searchNavLink.onclick = (e) => {
+            e.preventDefault()
+            openSearch()
+        }
     }
 
     // Open

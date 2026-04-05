@@ -74,6 +74,32 @@
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    align-items: center;
+}
+
+/* Circular rating */
+.diagram-rating {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diagram-rating svg {
+    position: absolute;
+    top: 0; left: 0;
+}
+
+.diagram-rating-val {
+    position: relative;
+    z-index: 1;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
 }
 
 .diagram-btns {
@@ -85,10 +111,14 @@
     color: #fff;
     cursor: pointer;
     transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .diagram-btns:hover {
     background: #2d3f64;
+    color: #fff;
 }
 
 /* описание */
@@ -360,4 +390,153 @@ span {
 
 .photo-img:hover {
     transform: scale(1.02);
+}
+
+/* ── Sub-pages (All actors / trailers / posters / photos) ─────────────────── */
+
+/* Hero area: big title on top, breadcrumb below */
+.subpage-hero {
+    padding: 40px 0 30px;
+}
+
+.subpage-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.1;
+}
+
+.subpage-breadcrumb {
+    font-size: 14px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.subpage-breadcrumb-link {
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.subpage-breadcrumb-link:hover { color: #fff; }
+
+.subpage-breadcrumb-sep { color: #94a3b8; }
+
+.subpage-breadcrumb span:last-child { color: #fff; }
+
+/* Group subheading (e.g. "Actors", "Ready or Not 2 (5)") */
+.subpage-group-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+/* All actors grid — 5 columns, same card as starring */
+.cast-grid--full {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+/* Trailers — one per block, full width, same as movie page */
+.trailer-item-block {
+    margin-bottom: 50px;
+}
+.trailer-item-block:last-child { margin-bottom: 0; }
+
+/* ── All Trailers subpage — 2-column grid with thumbnails ─────────────────── */
+.trailers-all-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 24px;
+}
+
+.trailers-all-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.trailers-all-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+    cursor: pointer;
+}
+
+.trailers-all-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.trailers-all-thumb:hover .trailers-all-img {
+    transform: scale(1.03);
+}
+
+.trailers-all-yt-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px;
+    height: 48px;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+.trailers-all-thumb:hover .trailers-all-yt-btn {
+    opacity: 0.85;
+}
+
+.trailers-all-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0 0;
+    gap: 12px;
+}
+
+.trailers-all-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    flex: 1;
+}
+
+.trailers-all-date {
+    font-size: 13px;
+    color: #94a3b8;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Posters full page — 3 large columns */
+.posters-grid--full {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.poster-img--large {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    transition: transform 0.3s;
+}
+.poster-img--large:hover { transform: scale(1.02); }
+
+/* Photos full page — 2 columns, same as movie page preview */
+.photos-grid--full {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
 }

@@ -1,0 +1,40 @@
+<div class="overhide hide">
+  <div class="search-container">
+    <a href="/" class="serch-logo-title">
+      <img src="https://kinoarea.com/front/img/logo-icon.svg" width="30px" height="30px" alt="">
+      Kino<span>area</span>
+    </a>
+    <div class="search-box">
+      <input type="text" placeholder="Search" class="search-content" id="search-content" name="searching" autocomplete="off">
+      <button class="search-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="search-close-btn" aria-label="Close search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-type-box">
+      <div class="search-tab active" data-type="movie">Movies</div>
+      <div class="search-tab" data-type="tv">TV</div>
+      <div class="search-tab" data-type="person">People</div>
+    </div>
+    <div class="render-box" id="search-results"></div>
+  </div>
+</div>
+
+<header class="header"></header>
+<div class="listing-page">
+  <div class="container listing-inner">
+    <div class="listing-hero">
+      <h1 class="listing-title">Films</h1>
+      <p class="listing-breadcrumb">
+        <span class="listing-breadcrumb-link" onclick="window.location.href='/'">Home</span>
+        <span class="listing-breadcrumb-sep">›</span>
+        <span>Films</span>
+      </p>
+    </div>
+    <div class="listing-grid" id="listing-grid"></div>
+    <div class="listing-pagination" id="listing-pagination"></div>
+  </div>
+</div>
+<footer class="footer"></footer>

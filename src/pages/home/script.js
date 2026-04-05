@@ -21,8 +21,14 @@ let popular_people_box2 = document.querySelector(".pop-people-right-box")
 let cardBox     = document.querySelector(".card-box")
 let geanre_list = document.querySelector(".genre-list")
 
-// Popular Movies swiper
+// ── "All trailers" link → /media#trailers ───────────────────────────────────
+const allTrailersLink = document.querySelector(".new-trailer-p")
+if (allTrailersLink) {
+    allTrailersLink.style.cursor = "pointer"
+    allTrailersLink.onclick = () => { window.location.href = "/media#trailers" }
+}
 
+// ── Popular Movies swiper ───────────────────────────────────────────────────
 const POPULAR_TOTAL    = 16
 const POPULAR_PER_VIEW = 4
 
@@ -57,8 +63,7 @@ function updatePopularPageLabel() {
     el.textContent = Math.floor(popularSwiper.activeIndex / POPULAR_PER_VIEW) + 1
 }
 
-// Upcoming Movies swiper
-
+// ── Upcoming Movies swiper ──────────────────────────────────────────────────
 const UPCOMING_TOTAL    = 6
 const UPCOMING_PER_VIEW = 3
 
@@ -93,8 +98,7 @@ function updateUpcomingPageLabel() {
     el.textContent = Math.floor(upcomingSwiper.activeIndex / UPCOMING_PER_VIEW) + 1
 }
 
-// DOM refs
-
+// ── DOM refs ────────────────────────────────────────────────────────────────
 let popular_movies_next_btn = document.querySelector(".popular-movies-next-btn")
 let popular_movies_last_btn = document.querySelector(".popular-movies-last-btn")
 let popular_movies_page_p   = document.querySelector(".popular-movies-page-p")
@@ -105,8 +109,78 @@ let upcoming_movies_page_p   = document.querySelector(".upcoming-movies-page-p")
 
 let trailerSwiperWrapper = document.querySelector(".trailers__swiper .swiper-wrapper")
 
-// API calls
+// ── Tab helpers ─────────────────────────────────────────────────────────────
 
+// Popular Movies tabs: Today=popular, Week=trending/week, Month=top_rated
+const movieTabApis = {
+    today: () => api.get("/movie/popular"),
+    week:  () => api.get("/trending/movie/week"),
+    month: () => api.get("/movie/top_rated"),
+}
+
+function setActiveMovieTab(key) {
+    document.querySelectorAll(".popular-movies-tabs .link, .popular-movies-tabs .links").forEach(el => {
+        const isActive = el.dataset.tab === key
+        el.className = isActive ? "link" : "links"
+    })
+    movieTabApis[key]().then(res => {
+        buildPopularSwiper(res.data.results)
+        const totalGroups = Math.ceil(POPULAR_TOTAL / POPULAR_PER_VIEW)
+        popular_movies_page_p.innerHTML = `<span class="popular-movies-page">1</span>/${totalGroups}`
+    })
+}
+
+// Popular Persons tabs: Today=popular, Week=trending/week, Month=trending/day (fallback)
+const personTabApis = {
+    today: () => api.get("/person/popular"),
+    week:  () => api.get("/trending/person/week"),
+    month: () => api.get("/trending/person/day"),
+}
+
+function setActivePersonTab(key) {
+    document.querySelectorAll(".popular-persons-tabs .link, .popular-persons-tabs .links").forEach(el => {
+        const isActive = el.dataset.tab === key
+        el.className = isActive ? "link" : "links"
+    })
+    personTabApis[key]().then(res => {
+        render(res.data.results.slice(0, 2), popular_people_box1, popularPeople)
+        render(res.data.results.slice(2, 6), popular_people_box2, popularPeoples)
+    })
+}
+
+// ── Wire up tabs in HTML ────────────────────────────────────────────────────
+// Movies tab links
+const movieTabLinks = document.querySelectorAll(".popular-upper-box:first-of-type .link-right-box a, .popular-movies-tabs a")
+// Actually select by DOM order - first popular-upper-box is movies
+const allPopularBoxes = document.querySelectorAll(".popular-upper-box")
+
+// Movies box (first)
+if (allPopularBoxes[0]) {
+    const movieTabBox = allPopularBoxes[0].querySelector(".link-right-box")
+    if (movieTabBox) {
+        movieTabBox.classList.add("popular-movies-tabs")
+        movieTabBox.querySelectorAll("a").forEach((a, i) => {
+            const keys = ["today", "week", "month"]
+            a.dataset.tab = keys[i]
+            a.onclick = e => { e.preventDefault(); setActiveMovieTab(keys[i]) }
+        })
+    }
+}
+
+// Persons box (second)
+if (allPopularBoxes[1]) {
+    const personTabBox = allPopularBoxes[1].querySelector(".link-right-box")
+    if (personTabBox) {
+        personTabBox.classList.add("popular-persons-tabs")
+        personTabBox.querySelectorAll("a").forEach((a, i) => {
+            const keys = ["today", "week", "month"]
+            a.dataset.tab = keys[i]
+            a.onclick = e => { e.preventDefault(); setActivePersonTab(keys[i]) }
+        })
+    }
+}
+
+// ── Initial API calls ───────────────────────────────────────────────────────
 Promise.all([
     api.get("/person/popular"),
     api.get("/movie/popular"),
@@ -119,7 +193,7 @@ Promise.all([
     render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
     render(popularMovieRes.data.results, cardBox, Movie)
 
-    // Popular swiper
+    // Popular Movies swiper
     buildPopularSwiper(popularMovieRes.data.results)
     const totalPopularGroups = Math.ceil(POPULAR_TOTAL / POPULAR_PER_VIEW)
     popular_movies_page_p.innerHTML =
@@ -161,8 +235,7 @@ Promise.all([
     render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
 })
 
-// Popular Movies arrows
-
+// ── Popular Movies arrows ───────────────────────────────────────────────────
 popular_movies_next_btn.onclick = () => {
     if (!popularSwiper) return
     popularSwiper.slideTo(
@@ -181,8 +254,7 @@ popular_movies_last_btn.onclick = () => {
     setTimeout(updatePopularPageLabel, 520)
 }
 
-// Upcoming Movies arrows
-
+// ── Upcoming Movies arrows ──────────────────────────────────────────────────
 upcoming_movies_next_btn.onclick = () => {
     if (!upcomingSwiper) return
     upcomingSwiper.slideTo(
