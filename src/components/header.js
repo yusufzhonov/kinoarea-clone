@@ -39,27 +39,136 @@ export function header() {
                 <li><a href="#" class="center-link" id="header-search-link">Search</a></li>
             </ul>
         </div>
-    </div>`
+    </div>
+
+    <!-- Login overlay -->
+    <div class="login-overhide hide">
+        <div class="login-screen">
+            <a href="/" class="logo-title login-logo"><img src="https://kinoarea.com/front/img/logo-icon.svg" width="22px" height="22px" alt="">Kino<span>area</span></a>
+            <button class="close-login-window" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <h1 class="login-title">Login</h1>
+            <div class="inputs">
+                <form class="login-form">
+                    <input type="text" id="email-login" name="email_input" class="email-input user-inp" placeholder="Email" autocomplete="off">
+                    <input type="text" id="name-login" name="name_input" class="name-input user-inp" placeholder="Name" autocomplete="off">
+                    <div class="login-error hide" id="login-error">Please enter a valid email and name (2+ letters)</div>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+            </div>
+            <a href="#" class="link-privacy">Privacy Policy</a>
+        </div>
+    </div>
+    `
 
     const headCn = document.querySelector(".head-cn")
     const headerRight = document.createElement("div")
     headerRight.className = "header-right"
 
-    // Search button
     const searchBtn = document.createElement("button")
     searchBtn.className = "search"
     searchBtn.setAttribute("aria-label", "Open search")
     searchBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`
-
-    // Login button
-    const loginBtn = document.createElement("button")
-    loginBtn.className = "login"
-
     headerRight.appendChild(searchBtn)
-    headerRight.appendChild(loginBtn)
+
+    // Login / User block
+    let account = (() => { try { return JSON.parse(sessionStorage.getItem("log-datas")) } catch { return null } })()
+
+    const loginOverlay = document.querySelector(".login-overhide")
+    const closeLoginBtn = document.querySelector(".close-login-window")
+    const loginForm = document.querySelector(".login-form")
+    const loginError = document.querySelector("#login-error")
+
+    function buildUserBlock(data) {
+        const userDats = document.createElement("div")
+        userDats.className = "user-dats"
+        userDats.style.cursor = "pointer"
+        userDats.title = "Your profile"
+
+        const avatarBox = document.createElement("div")
+        avatarBox.className = "log-avatar"
+        const img = document.createElement("img")
+        img.src = data.avatarUrl || "https://kinoarea.com/front/img/comment-no-author.png"
+        img.className = "user-icon"
+        avatarBox.appendChild(img)
+
+        const userNames = document.createElement("div")
+        userNames.className = "user-names"
+        const hello = document.createElement("p")
+        hello.className = "word-hello"
+        hello.textContent = "Hello"
+        const personName = document.createElement("p")
+        personName.className = "person-name"
+        personName.textContent = data.name
+        userNames.append(hello, personName)
+
+        userDats.append(avatarBox, userNames)
+        userDats.addEventListener("click", () => { window.location.href = "/profile" })
+        return userDats
+    }
+
+    if (account) {
+        headerRight.appendChild(buildUserBlock(account))
+    } else {
+        const loginBtn = document.createElement("button")
+        loginBtn.className = "login"
+
+        loginBtn.onclick = () => {
+            loginOverlay.classList.remove("hide")
+            loginOverlay.classList.add("show")
+        }
+
+        closeLoginBtn.onclick = () => {
+            loginOverlay.classList.remove("show")
+            loginOverlay.classList.add("hide")
+        }
+        loginOverlay.addEventListener("click", (e) => {
+            if (e.target === loginOverlay) {
+                loginOverlay.classList.remove("show")
+                loginOverlay.classList.add("hide")
+            }
+        })
+
+        loginForm.onsubmit = (e) => {
+            e.preventDefault()
+            const fd = new FormData(loginForm)
+            const regexes = {
+                "email_input": /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/,
+                "name_input": /^[a-zA-Za-zA-Z\s]{2,}$/
+            }
+            let valid = true
+            document.querySelectorAll(".user-inp").forEach(inp => {
+                if (!regexes[inp.name]?.test(inp.value)) valid = false
+            })
+            if (!valid) { loginError.classList.remove("hide"); return }
+            loginError.classList.add("hide")
+
+            const saveUser = (sessionId) => {
+                const datas = {
+                    email: fd.get("email_input"),
+                    name: fd.get("name_input"),
+                    sessionId,
+                    avatarUrl: "https://kinoarea.com/front/img/comment-no-author.png"
+                }
+                sessionStorage.setItem("log-datas", JSON.stringify(datas))
+                loginBtn.remove()
+                loginOverlay.classList.remove("show")
+                loginOverlay.classList.add("hide")
+                headerRight.appendChild(buildUserBlock(datas))
+            }
+
+            api.get("authentication/guest_session/new")
+                .then(res => saveUser(res.data.guest_session_id))
+                .catch(() => saveUser(null))
+        }
+
+        headerRight.appendChild(loginBtn)
+    }
+
     headCn.append(headerRight)
 
-    // ── Search overlay logic ──────────────────────────────────────────────
+    // Search overlay logic
     const overlay   = document.querySelector(".overhide")
     const input     = document.querySelector(".search-content")
     const closeBtn  = document.querySelector(".search-close-btn")
@@ -76,36 +185,24 @@ export function header() {
         overlay.classList.add("show")
         setTimeout(() => input && input.focus(), 80)
     }
-
     function closeSearch() {
         overlay.classList.remove("show")
         overlay.classList.add("hide")
         if (input) input.value = ""
         if (resultsEl) resultsEl.innerHTML = ""
     }
-
     function doSearch(query, type) {
-        if (!query || query.trim().length < 2) {
-            if (resultsEl) resultsEl.innerHTML = ""
-            return
-        }
+        if (!query || query.trim().length < 2) { if (resultsEl) resultsEl.innerHTML = ""; return }
         api.get(`/search/${type}?query=${encodeURIComponent(query)}`).then(res => {
             if (!resultsEl) return
             resultsEl.innerHTML = ""
             const items = res.data.results || []
-            if (items.length === 0) {
-                resultsEl.innerHTML = `<p style="color:#64748b;text-align:center;padding:30px 0;">Nothing found for "${query}"</p>`
-                return
-            }
-            if (type === "person") {
-                render(items.slice(0, 10), resultsEl, searchPerson)
-            } else {
-                render(items.slice(0, 10), resultsEl, SearchMovie)
-            }
+            if (items.length === 0) { resultsEl.innerHTML = `<p style="color:#64748b;text-align:center;padding:30px 0;">Nothing found for "${query}"</p>`; return }
+            if (type === "person") render(items.slice(0, 10), resultsEl, searchPerson)
+            else render(items.slice(0, 10), resultsEl, SearchMovie)
         })
     }
 
-    // Highlight active nav link
     const currentPath = window.location.pathname
     document.querySelectorAll(".header-menu .center-link").forEach(link => {
         const href = link.getAttribute("href")
@@ -116,50 +213,25 @@ export function header() {
         }
     })
 
-    // Open search on nav "Search" link click
     const searchNavLink = document.getElementById("header-search-link")
-    if (searchNavLink) {
-        searchNavLink.onclick = (e) => {
-            e.preventDefault()
-            openSearch()
-        }
-    }
+    if (searchNavLink) searchNavLink.onclick = (e) => { e.preventDefault(); openSearch() }
 
-    // Open
     searchBtn.onclick = openSearch
-
-    // Close button
     if (closeBtn) closeBtn.onclick = closeSearch
-
-    // Close on backdrop click
-    overlay.onclick = (e) => {
-        if (e.target === overlay) closeSearch()
-    }
-
-    // Close on Escape
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeSearch()
-    })
-
-    // Input typing with debounce
+    overlay.onclick = (e) => { if (e.target === overlay) closeSearch() }
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSearch() })
     if (input) {
         input.addEventListener("input", () => {
             clearTimeout(debounceTimer)
-            debounceTimer = setTimeout(() => {
-                doSearch(input.value, currentType)
-            }, 320)
+            debounceTimer = setTimeout(() => doSearch(input.value, currentType), 320)
         })
     }
-
-    // Tab switching
     tabs.forEach(tab => {
         tab.addEventListener("click", () => {
             tabs.forEach(t => t.classList.remove("active"))
             tab.classList.add("active")
             currentType = tab.dataset.type
-            if (input && input.value.trim().length >= 2) {
-                doSearch(input.value, currentType)
-            }
+            if (input && input.value.trim().length >= 2) doSearch(input.value, currentType)
         })
     })
 }

@@ -539,3 +539,188 @@ header {
     border-radius: 6px;
     flex-shrink: 0;
 }
+
+/* ── Login Overlay ────────────────────────────────── */
+.login-overhide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+.login-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: min(520px, 95vw);
+    border-radius: 16px;
+    background-color: #151c2e;
+    border: 1px solid rgba(54, 87, 203, 0.25);
+    padding: 40px 36px 32px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    animation: loginSlideIn 0.25s ease;
+}
+
+@keyframes loginSlideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.login-logo {
+    margin-bottom: 8px;
+}
+
+.close-login-window {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: #1e2538;
+    border: none;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #94a3b8;
+    transition: background 0.2s, color 0.2s;
+}
+.close-login-window:hover {
+    background: #2d3a54;
+    color: #fff;
+}
+
+.login-title {
+    color: white;
+    font-size: 32px;
+    font-weight: 800;
+    margin: 16px 0 24px;
+    letter-spacing: 0.5px;
+}
+
+.inputs {
+    width: 100%;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.user-inp {
+    width: 100%;
+    height: 56px;
+    padding: 0 20px;
+    background: #1e2538;
+    color: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.user-inp:focus {
+    border-color: #3657cb;
+}
+.user-inp::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.login-error {
+    color: #f87171;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 4px;
+}
+
+.login-btn {
+    width: 100%;
+    height: 52px;
+    background: #3657cb;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, background 0.2s;
+    box-shadow: 0 0 20px rgba(54, 87, 203, 0.5);
+    margin-top: 4px;
+}
+.login-btn:hover {
+    opacity: 0.85;
+    background: #2d48a8;
+}
+
+.link-privacy {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #3657cb;
+    text-decoration: none;
+    opacity: 0.8;
+}
+.link-privacy:hover { opacity: 1; }
+
+/* ── User block in header ─────────────────────────── */
+.user-dats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 10px 4px 4px;
+    border-radius: 40px;
+    background: #1e2538;
+    transition: background 0.2s;
+}
+.user-dats:hover { background: #273050; }
+
+.log-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #3657cb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.user-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+}
+
+.user-names {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.word-hello {
+    font-size: 11px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.person-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -21,14 +21,14 @@ let popular_people_box2 = document.querySelector(".pop-people-right-box")
 let cardBox     = document.querySelector(".card-box")
 let geanre_list = document.querySelector(".genre-list")
 
-// ── "All trailers" link → /media#trailers ───────────────────────────────────
+// "All trailers" link → /media#trailers
 const allTrailersLink = document.querySelector(".new-trailer-p")
 if (allTrailersLink) {
     allTrailersLink.style.cursor = "pointer"
     allTrailersLink.onclick = () => { window.location.href = "/media#trailers" }
 }
 
-// ── Popular Movies swiper ───────────────────────────────────────────────────
+// Popular Movies swiper
 const POPULAR_TOTAL    = 16
 const POPULAR_PER_VIEW = 4
 
@@ -63,7 +63,7 @@ function updatePopularPageLabel() {
     el.textContent = Math.floor(popularSwiper.activeIndex / POPULAR_PER_VIEW) + 1
 }
 
-// ── Upcoming Movies swiper ──────────────────────────────────────────────────
+// Upcoming Movies swiper
 const UPCOMING_TOTAL    = 6
 const UPCOMING_PER_VIEW = 3
 
@@ -98,7 +98,7 @@ function updateUpcomingPageLabel() {
     el.textContent = Math.floor(upcomingSwiper.activeIndex / UPCOMING_PER_VIEW) + 1
 }
 
-// ── DOM refs ────────────────────────────────────────────────────────────────
+// DOM refs
 let popular_movies_next_btn = document.querySelector(".popular-movies-next-btn")
 let popular_movies_last_btn = document.querySelector(".popular-movies-last-btn")
 let popular_movies_page_p   = document.querySelector(".popular-movies-page-p")
@@ -109,7 +109,7 @@ let upcoming_movies_page_p   = document.querySelector(".upcoming-movies-page-p")
 
 let trailerSwiperWrapper = document.querySelector(".trailers__swiper .swiper-wrapper")
 
-// ── Tab helpers ─────────────────────────────────────────────────────────────
+// Tab helpers
 
 // Popular Movies tabs: Today=popular, Week=trending/week, Month=top_rated
 const movieTabApis = {
@@ -148,7 +148,7 @@ function setActivePersonTab(key) {
     })
 }
 
-// ── Wire up tabs in HTML ────────────────────────────────────────────────────
+// Wire up tabs in HTML
 // Movies tab links
 const movieTabLinks = document.querySelectorAll(".popular-upper-box:first-of-type .link-right-box a, .popular-movies-tabs a")
 // Actually select by DOM order - first popular-upper-box is movies
@@ -180,7 +180,7 @@ if (allPopularBoxes[1]) {
     }
 }
 
-// ── Initial API calls ───────────────────────────────────────────────────────
+// Initial API calls
 Promise.all([
     api.get("/person/popular"),
     api.get("/movie/popular"),
@@ -235,7 +235,7 @@ Promise.all([
     render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
 })
 
-// ── Popular Movies arrows ───────────────────────────────────────────────────
+// Popular Movies arrows
 popular_movies_next_btn.onclick = () => {
     if (!popularSwiper) return
     popularSwiper.slideTo(
@@ -254,7 +254,7 @@ popular_movies_last_btn.onclick = () => {
     setTimeout(updatePopularPageLabel, 520)
 }
 
-// ── Upcoming Movies arrows ──────────────────────────────────────────────────
+// Upcoming Movies arrows
 upcoming_movies_next_btn.onclick = () => {
     if (!upcomingSwiper) return
     upcomingSwiper.slideTo(

@@ -172,6 +172,19 @@ export const routes = [
             await import("../pages/person/script.js")
         }
     },
+    {
+        path: /^\/profile$/,
+        view: async (app) => {
+            const response = await fetch('/pages/profile/index.html')
+            app.innerHTML = await response.text()
+        },
+        loadStyles: async () => {
+            await import("../pages/profile/style.css")
+        },
+        loadScripts: async () => {
+            await import("../pages/profile/script.js")
+        }
+    },
 ]
 
 export const notFound = {

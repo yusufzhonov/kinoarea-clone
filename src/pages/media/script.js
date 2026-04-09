@@ -5,7 +5,7 @@ import { footer } from "../../components/footer"
 header()
 footer()
 
-// ── Tab navigation ──────────────────────────────────────────────────────────
+// Tab navigation
 const tabs = document.querySelectorAll(".media-tab")
 const sections = document.querySelectorAll(".media-section")
 
@@ -38,7 +38,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.3 })
 sections.forEach(s => observer.observe(s))
 
-// ── Lightbox ────────────────────────────────────────────────────────────────
+// Lightbox
 let lbImages = []
 let lbIndex  = 0
 
@@ -98,7 +98,7 @@ function openLightbox(images, index) {
     document.body.appendChild(lb)
 }
 
-// ── Trailers ────────────────────────────────────────────────────────────────
+// Trailers
 const trailersGrid = document.querySelector(".media-trailers-grid")
 
 api.get("/movie/now_playing").then(res => {
@@ -167,7 +167,7 @@ api.get("/movie/now_playing").then(res => {
     })
 })
 
-// ── Posters — lightbox on click ─────────────────────────────────────────────
+// Posters - lightbox on click
 const postersGrid = document.querySelector(".media-posters-grid")
 
 api.get("/movie/popular").then(res => {
@@ -204,7 +204,7 @@ api.get("/movie/popular").then(res => {
     })
 })
 
-// ── Photos — lightbox on click ───────────────────────────────────────────────
+// Photos - lightbox on click
 const photosGrid = document.querySelector(".media-photos-grid")
 
 api.get("/movie/now_playing").then(res => {

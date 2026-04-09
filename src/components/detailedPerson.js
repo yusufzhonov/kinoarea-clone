@@ -15,7 +15,7 @@ export function DetailedPerson(item) {
     const hero = document.createElement("div")
     hero.className = "person-hero-inner container"
 
-    // Photo — centered, large
+    // Photo - centered, large
     const photoWrap = document.createElement("div")
     photoWrap.className = "person-photo-wrap"
 
@@ -253,7 +253,7 @@ export function DetailedPerson(item) {
             bestSection.appendChild(swiperOuter)
             sectionsContainer.appendChild(bestSection)
 
-            // ── Init Swiper ──────────────────────────────────────────────────
+            // Init Swiper
             const bestSwiper = new Swiper(swiperEl, {
                 modules: [FreeMode],
                 slidesPerView: BEST_PER_VIEW,
@@ -291,7 +291,7 @@ export function DetailedPerson(item) {
             }
         }
 
-        // Filmography list — max 10
+        // Filmography list - max 10
         const allMovies = res.data.cast
             .filter(function(m) { return m.poster_path })
             .sort(function(a, b) { return (b.release_date || "").localeCompare(a.release_date || "") })
